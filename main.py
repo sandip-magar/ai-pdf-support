@@ -3,7 +3,7 @@ from routers.auth import router as auth_router
 from core.extension import HTTPException_handler, unexpected_error_handler, validation_errorh_handler
 from fastapi.exceptions import RequestValidationError
 from routers.users import router as user_router
-from ai.chain import router as ai_router
+from ai.file_upload import router as ai_router
 from chat.history import router as history_router
 from ai.ask_question import router as ask_router
 

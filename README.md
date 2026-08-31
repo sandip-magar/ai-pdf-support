@@ -101,7 +101,7 @@ requirements.txt/       #Python dependencies
 
 ## Author
 **Sandip Agar**
--GitHub: [@sandipagar](https://github.com/sandipagar)
+-GitHub: [@sandip-magar](https://github.com/sandip-magar)
 
 --
 *Built with ❤️ using FastAPI, LangChain, and Streamlit*
