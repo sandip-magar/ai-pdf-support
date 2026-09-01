@@ -8,7 +8,6 @@ import tempfile , asyncio, os
 from db.schemas import UserQuestion
 from db.models import User, PDFDocument, ChatMessage
 from sqlalchemy.orm import Session
-from datetime import datetime 
 from sqlalchemy.sql import func
 import pdfplumber
 
@@ -93,7 +92,7 @@ async def upload_pdf(
 @router.delete("/delete-pdf/{document_id}")
 async def delete_pdf(
     document_id: int, 
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user), 
     db: Session = Depends(get_db)
 ):
     #check for the existance of the documents
