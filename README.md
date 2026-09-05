@@ -1,107 +1,123 @@
-# 🤖 AI PDF Support system
+# AI PDF SUPPORT 
 
-A full-stack AI-powered chatbot that answers questions from uploaded PDF documents using RAG (Retrievel-Augmented Generation). Build with FASTAPI, Streamlit, and postgreSQL with pgvector.
+**AI PDF SUPPORT** is an intelligent, fully containerized document processing API. It allows users to securely register, upload PDF documents, and ask complex questions about their content using advanced AI. 
 
-## ✨ Features
-
--🔏 **User Authentication** -JWT-based user registration and login.
--📄 **PDF Uploaded & Processing** - Upload PDF's and automatically extract/embed text, and chunk it for the AI.
--🧠**Semantic Search** - Uses pgvector to store and retrieve document embeddings for accurate answers.
--**Interactive Chat** - Clean Streamlit interface to chat with your uploaded documents.
--📊 **Chat History** - Persists user conversations in a PostgreSQL database.
-
-## Tech Stack 
-
-**Backend**
--FastAPI (High-Performance Python API)
--LangChain(LLM orchestration and RAG pipeline)
--PostgreSQL + pgvector (Vector Database for embeddings)
--Google Gemini API(LLM and Embeddings)
--SQLAlchemy (ORM)
-
-**Frontend.**
--Streamlit(Interactive Web UI)
-
-## 🗄️Prerequisites
-
--Python 3.10+
--PostgreSQL 16+ (with 'pgvector' extension enabled)
--A Google Gemini API Key
-
-## Installation & Setup
-
-1. **Clone the repository.**
-```bash
-   git clone https://github.com/sandipagar/ai-pdf-support.git
-   cd ai-pdf-support
-```
-
-2. **Create and activate a virtual environment.**
-```bash
-   python -m venv venv
-   #Windows:
-   venv/scripts/activate
-   #Mac/Linux
-   source venv/bin/activate
-```
-
-3. **Install dependencies.**
-```bash
-   pip install -r requirements.txt
-```
-
-4. **Configure Environment Variables.**
-   Create a '.env' file in the root directory and add your credentials:
-```env
-   GOOGLE_API_KEY = your_google_api_key_key_here
-   LLM_MODEL_NAME = gemini-3.5-flash-lite
-   EMBEDDING_MODEL_NAME = gemini-embedding-001
-   DATABASE_URL = postgresql://postgre:Your_Password@localhost:5432/ai_pdf_db
-   SECRET_KEY = your_super_secret_jwt_key
-   ACCESS_TOKEN_EXPIRE_MINUTES = 30
-```
-
-5. **Enable pgvector in your database.**
-   Open your PostgreSQL query tool and run:
-```sql
-   CREATE EXTENSION IF NOT EXISTS vector;
-```
-
-6. **Run the backend.**
-```bash
-   uvicorn main:app -reload --port 8000
-```
-   
-   *(You can view the interactive API docs at 'http://localhost:8000/docs')*
-
-7. **Run the Frontend.**
-```bash
-   stremlit run app.py
-```
-
-## 📂 Project Structure
-
-```text
-ai-pdf-support/
-core/                   #Security, JWT, and config
-db/                     #SQLAlchemy models and database connection 
-routers/                #API endpoint (Auth, AI, Chat)
-app.py/                 #Streamlit frontend
-main.py/                #FastAPI backend entry point
-requirements.txt/       #Python dependencies
-```
-
-## API Endpoints
-
--'POST /api/auth/register' -Register a new user
--'POST /api/auth/login' - Authenticate and receive a JWT token
--'POST /api/ai/upload-pdf' - Upload and proecess a PDF file
--'POST /api/ai/ask-ai' - Send a question to the RAG pipeline
--'DELETE /api/ai/chat-history - Clear the user's chat history 
-
-## Author
-**Sandip Agar**
--GitHub: [@sandip-magar](https://github.com/sandip-magar)
+By leveraging **Retrieval-Augmented Generation(RAG)** and **Vector Database**, the application understand the semantic meaning of your documents, providing highly accurate, contet-aware answers.
 
 --
-*Built with ❤️ using FastAPI, LangChain, and Streamlit*
+
+## Features
+
+- **Secure Authentication**: JWT-based user registration and login.
+- **PDF Processing**: Automatic text extraction and chunking from ploaded PDF files. 
+- **AI-Powered Q&A**: Ask questions about your documents and get accurate answers powered by Google Gemini.
+- **Semantic Search**: Uses 'pgvector' to find the most relevant document sections based on meaning, not just keywords.
+- **Fully Dockerized**: One-command setup for both the API and the Vector Database.
+
+--
+
+## Tech Stack
+
+- **Backend Framework**: Python, FastAPI
+- **Database**: PostgreSQL 16
+- **Vector Extension**: pgvector (for AI Embeddings)
+- **Containerization**: Docker & Docker Compose 
+- **AI Models**: Google Gemini (LLM) & Text Embedding (Vectorization)
+
+--
+
+## Prerequisites 
+
+Before you begin, ensure you have the following installed on your machine: 
+-[Docker Desktop](https://www.docker.com/products/docker-desktop/)(Required to run the app)
+-[Git](https://git-scm.com/) (To clone the repository)
+
+--
+
+## Installation & Setup 
+
+Follow these steps to get the application running on your local machine in minutes.
+
+### 1. Clone the repository 
+Open your terminal or PowerShell and run: 
+```bash
+git clone https://github.com/sandip-magar/ai-pdf-support.git
+cd ai_pdf_db
+```
+
+### 2. Configure Environment Variables
+The application requires a '.env' file to manage secrets and configuration.
+
+**Step A: Generate a Secure Secret Key**
+First, you need to generate a secure random string for your JWT authentication. Run this command in your terminal.
+```bash
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+*Copy the long string that gets printed out.*
+
+**Step B: Create the '.env' File**
+Create a new file named exactly '.env' in the root directory of the project and paste the following configuration.
+
+```env
+# Database Configuration (Do not changethe host 'db', it connets to the Docker container)
+DATABASE_URL=postgresql://admin:securepassword123@db:5432/ai_pdf_db
+
+# AI Configuration
+GOOGLE_API_KEY=Your_actual_google_api_key_here
+LLM_MODEL_NAME=gemini-3.5-flash-lite
+EMBEDDING_MODEL_NAME=gemini-embedding-001
+
+#Security Configuration 
+SECRET_KEY=paste_the_generated_key_here
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTE=1440
+```
+
+*(Make sure to replace 'your_actual_google_api_key_here' with your real Google AI Studio API key, and paste your generated key into 'SECRET_KEY'.)
+
+### 3. Access the API 
+Once the container are running, open your web browser and navigate to the interactive Swagger UI documentation.
+
+**http://localhost:8000/docs**
+
+Here you can test all the endpoints, register a user, login, upload PDFs, and ask questions!
+
+--
+
+## Managing the application 
+
+**Stop the application (keeps your database data safe).**
+```bash
+docker-compose down 
+```
+
+**Restart the appliation**
+```bash
+docker-compose up -d
+```
+
+**Wipe everything (Deletes the database and starts fresh).**
+*Warning: This will permanently delete all users and uploaded PDFs.*
+```bash
+docker-compose down -v
+```
+
+--
+
+## Project Structure
+
+ai-pdf-support/
+├── core/               # Database connection and security configs
+├── models/             # SQLAlchemy database models (Users, PDFs)
+├── routers/            # FastAPI API endpoints (Auth, PDF, Chat)
+├── services/           # Business logic (AI processing, PDF parsing)
+├── docker-compose.yml  # Docker orchestration file
+├── Dockerfile          # Python environment build instructions
+├── init.sql            # Initializes pgvector extension on DB startup
+├── main.py             # Application entry point
+├── requirements.txt    # Python dependencies
+├── .env                # Environment variables (DO NOT COMMIT TO GITHUB)
+├── .env.example        # Template for environment variables
+├── .gitignore          # Git ignore rules
+└── README.md           # Project documentation
