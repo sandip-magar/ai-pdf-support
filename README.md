@@ -29,8 +29,10 @@ By leveraging **Retrieval-Augmented Generation(RAG)** and **Vector Database**, t
 ## Prerequisites 
 
 Before you begin, ensure you have the following installed on your machine: 
+```bash
 -[Docker Desktop](https://www.docker.com/products/docker-desktop/)(Required to run the app)
 -[Git](https://git-scm.com/) (To clone the repository)
+```
 
 --
 
