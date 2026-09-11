@@ -103,7 +103,7 @@ docker-compose up --build -d
 ```
 
 ## 🧪 Running Tests
-
+```bash
 #Run all tests
 pytest
 
@@ -112,6 +112,7 @@ pytest -v
 
 #Run with coverage report
 pytest --cov=app
+```
 
 ## 📡 API Endpoints
 
