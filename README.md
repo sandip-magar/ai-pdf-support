@@ -104,13 +104,13 @@ docker-compose up --build -d
 
 ## 🧪 Running Tests
 
-# Run all tests
+#Run all tests
 pytest
 
-# Run with verbose output
+#Run with verbose output
 pytest -v
 
-# Run with coverage report
+#Run with coverage report
 pytest --cov=app
 
 ## 📡 API Endpoints
@@ -149,7 +149,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES=30
 
 # AI Configuration
 GOOGLE_API_KEY=your_gemini_api_key_here
-EMBEDDING_MODEL=gemini-embedding
+EMBEDDING_MODEL=gemini-embedding-001
 LLM_MODEL=gemini-pro
 EMBEDDING_DIMENSION=3072
 
