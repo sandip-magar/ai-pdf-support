@@ -12,10 +12,10 @@ A production-ready document intelligence system that allows users to upload PDFs
 - *🧩 Smart Chunking*: Intelligent document chunking for optimal retrieval
 - *🔍 Semantic Search*: Vector similarity search using pgvector
 - * Natural Q&A*: Ask questions in plain English about your documents
--*🔐 User Authentication**: Secure JWT-based authentication
--*📊 Chat History**: Persistent conversation history per user
--*🐳 Dockerized**: One-command deployment with Docker Compose
--*🧪 Tested**: Full pytest coverage
+- *🔐 User Authentication**: Secure JWT-based authentication
+- *📊 Chat History**: Persistent conversation history per user
+- *🐳 Dockerized**: One-command deployment with Docker Compose
+- *🧪 Tested**: Full pytest coverage
 
 ## ️ Architecture
 
@@ -63,8 +63,8 @@ ai-pdf-support/
 
 Before you begin, ensure you have the following installed:
 
-* 🐳 *[Docker & Docker Compose](https://www.docker.com/products/docker-desktop/)* - Required to run containers
-*  *[Google Gemini API Key](https://aistudio.google.com/app/apikey)* - For AI embeddings
+* 🐳 **[Docker & Docker Compose]*(https://www.docker.com/products/docker-desktop/)*** - Required to run containers
+*  **[Google Gemini API Key]*(https://aistudio.google.com/app/apikey)*** - For AI embeddings
 
 ### Installation
 
