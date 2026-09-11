@@ -1,125 +1,245 @@
-# AI PDF SUPPORT 
+# 📄 AI PDF RAG Application
 
-**AI PDF SUPPORT** is an intelligent, fully containerized document processing API. It allows users to securely register, upload PDF documents, and ask complex questions about their content using advanced AI. 
+A production-ready document intelligence system that allows users to upload PDFs and ask questions using natural language. Built with FastAPI, pgvector, and Gemini AI.
 
-By leveraging **Retrieval-Augmented Generation(RAG)** and **Vector Database**, the application understand the semantic meaning of your documents, providing highly accurate, contet-aware answers.
+- [![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-green.svg)](https://fastapi.tiangolo.com)
+- [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads)
+- [![pgvector](https://img.shields.io/badge/pgvector-0.5.0-blue.svg)](https://github.com/pgvector/pgvector)
 
---
+## ✨ Features
 
-## Features
+- *📥 PDF Upload*: Multi-file upload with automatic text extraction
+- *🧩 Smart Chunking*: Intelligent document chunking for optimal retrieval
+- *🔍 Semantic Search*: Vector similarity search using pgvector
+- * Natural Q&A*: Ask questions in plain English about your documents
+-*🔐 User Authentication**: Secure JWT-based authentication
+-*📊 Chat History**: Persistent conversation history per user
+-*🐳 Dockerized**: One-command deployment with Docker Compose
+-*🧪 Tested**: Full pytest coverage
 
-- **Secure Authentication**: JWT-based user registration and login.
-- **PDF Processing**: Automatic text extraction and chunking from ploaded PDF files. 
-- **AI-Powered Q&A**: Ask questions about your documents and get accurate answers powered by Google Gemini.
-- **Semantic Search**: Uses 'pgvector' to find the most relevant document sections based on meaning, not just keywords.
-- **Fully Dockerized**: One-command setup for both the API and the Vector Database.
+## ️ Architecture
 
---
+This project implements a *RAG (Retrieval-Augmented Generation)* pipeline:
 
-## Tech Stack
+## Porject Structure
+```
+ai-pdf-support/
+├── ai/                          # AI Core Logic
+│   ├── __init__.py
+│   ├── ask_question.py          # Question handling & RAG logic
+│   ├── brain.py                 # LLM & Embedding configuration
+│   └── file_upload.py           # PDF processing & chunking
+├── chat/                        # Chat History Management
+│   ├── __init__.py
+│   └── chat_history.py          # Get/delete conversation history
+├── core/                        # Configuration & Security
+│   ├── __init__.py
+│   ├── config.py                # Environment variables
+│   ├── security.py              # JWT, password hashing
+│   └── extensions.py            # Logging & middleware
+├── db/                          # Database Layer
+│   ├── __init__.py
+│   ├── database.py              # Database connection & session
+│   ├── models.py                # SQLAlchemy models
+│   └── schemas.py               # Pydantic schemas
+├── routers/                     # API Endpoints
+│   ├── __init__.py
+│   ├── auth.py                  # Register, login, auth routes
+│   └── users.py                 # User CRUD operations
+├── docker-compose.yml           # Docker orchestration
+├── Dockerfile                   # Python 3.11 environment
+├── init.sql                     # Database initialization
+├── main.py                      # FastAPI app with lifespan
+├── requirements.txt             # Python dependencies
+├── .env.example                 # Environment template
+├── .gitignore                   # Git ignore rules
+├── .dockerignore                # Docker ignore rules
+└── README.md                    # Project documentation
+```
 
-- **Backend Framework**: Python, FastAPI
-- **Database**: PostgreSQL 16
-- **Vector Extension**: pgvector (for AI Embeddings)
-- **Containerization**: Docker & Docker Compose 
-- **AI Models**: Google Gemini (LLM) & Text Embedding (Vectorization)
+## 🚀 Quick Start
 
---
+### Prerequisites
 
-## Prerequisites 
+Before you begin, ensure you have the following installed:
 
-Before you begin, ensure you have the following installed on your machine: 
+* 🐳 *[Docker & Docker Compose](https://www.docker.com/products/docker-desktop/)* - Required to run containers
+*  *[Google Gemini API Key](https://aistudio.google.com/app/apikey)* - For AI embeddings
+
+### Installation
+
+1. *Clone the repository:*
+git clone https://github.com/sandip-magar/AI-PDF-RAG.git
+cd AI-PDF-RAG
+
+2. *Create environment file:*
+cp .env.example .env
+# Edit .env with your credentials
+
+3. *Access the application:*
+- Swagger UI: http://localhost:8000/docs
+- Health Check: http://localhost:8000/health
+
+### 🛠️ Docker Management Commands
+
+*Stop the containers (keeps data):*
 ```bash
--[Docker Desktop](https://www.docker.com/products/docker-desktop/)(Required to run the app)
--[Git](https://git-scm.com/) (To clone the repository)
+docker-compose down
 ```
 
---
-
-## Installation & Setup 
-
-Follow these steps to get the application running on your local machine in minutes.
-
-### 1. Clone the repository 
-Open your terminal or PowerShell and run: 
-```bash
-git clone https://github.com/sandip-magar/ai-pdf-support.git
-cd ai_pdf_db
-```
-
-### 2. Configure Environment Variables
-The application requires a '.env' file to manage secrets and configuration.
-
-**Step A: Generate a Secure Secret Key**
-First, you need to generate a secure random string for your JWT authentication. Run this command in your terminal.
-```bash
-python -c "import secrets; print(secrets.token_urlsafe(32))"
-```
-
-*Copy the long string that gets printed out.*
-
-**Step B: Create the '.env' File**
-Create a new file named exactly '.env' in the root directory of the project and paste the following configuration.
-
-```env
-# Database Configuration (Do not changethe host 'db', it connets to the Docker container)
-DATABASE_URL=postgresql://admin:securepassword123@db:5432/ai_pdf_db
-
-# AI Configuration
-GOOGLE_API_KEY=Your_actual_google_api_key_here
-LLM_MODEL_NAME=gemini-3.5-flash-lite
-EMBEDDING_MODEL_NAME=gemini-embedding-001
-
-#Security Configuration 
-SECRET_KEY=paste_the_generated_key_here
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTE=1440
-```
-
-*(Make sure to replace 'your_actual_google_api_key_here' with your real Google AI Studio API key, and paste your generated key into 'SECRET_KEY'.)
-
-### 3. Access the API 
-Once the container are running, open your web browser and navigate to the interactive Swagger UI documentation.
-
-**http://localhost:8000/docs**
-
-Here you can test all the endpoints, register a user, login, upload PDFs, and ask questions!
-
---
-
-## Managing the application 
-
-**Stop the application (keeps your database data safe).**
-```bash
-docker-compose down 
-```
-
-**Restart the appliation**
-```bash
-docker-compose up -d
-```
-
-**Wipe everything (Deletes the database and starts fresh).**
-*Warning: This will permanently delete all users and uploaded PDFs.*
+*Stop and reset database (deletes all data):*
 ```bash
 docker-compose down -v
 ```
 
---
+*View logs (debugging):*
+```bash
+docker-compose logs -f
+```
 
-## Project Structure
+*Rebuild after code changes:*
+```bash
+docker-compose up --build -d
+```
 
-ai-pdf-support/
-├── core/               # Database connection and security configs
-├── models/             # SQLAlchemy database models (Users, PDFs)
-├── routers/            # FastAPI API endpoints (Auth, PDF, Chat)
-├── services/           # Business logic (AI processing, PDF parsing)
-├── docker-compose.yml  # Docker orchestration file
-├── Dockerfile          # Python environment build instructions
-├── init.sql            # Initializes pgvector extension on DB startup
-├── main.py             # Application entry point
-├── requirements.txt    # Python dependencies
-├── .env                # Environment variables (DO NOT COMMIT TO GITHUB)
-├── .env.example        # Template for environment variables
-├── .gitignore          # Git ignore rules
-└── README.md           # Project documentation
+## 🧪 Running Tests
+
+# Run all tests
+pytest
+
+# Run with verbose output
+pytest -v
+
+# Run with coverage report
+pytest --cov=app
+
+## 📡 API Endpoints
+
+### Authentication
+- POST /auth/register - Create new user account
+- POST /auth/login - Authenticate and receive JWT token
+- POST /auth/logout - Logout current user
+
+### Documents
+- POST /documents/upload - Upload PDF file (multipart/form-data)
+- GET /documents - List all user documents
+- GET /documents/{doc_id} - Get specific document details
+- DELETE /documents/{doc_id} - Delete document
+
+### Chat & Q&A
+- POST /chat/ask - Ask question about uploaded documents
+- GET /chat/history - Get conversation history
+- DELETE /chat/clear - Clear chat history
+
+## 🔧 Environment Variables
+
+Create a .env file in the root directory:
+```bash
+env
+# Database Configuration
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=your_secure_password
+POSTGRES_DB=ai_pdf_db
+DATABASE_URL=postgresql://admin:your_secure_password@db:5432/ai_pdf_db
+
+# Security
+SECRET_KEY=your_32_character_secret_key_here
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# AI Configuration
+GOOGLE_API_KEY=your_gemini_api_key_here
+EMBEDDING_MODEL=gemini-embedding
+LLM_MODEL=gemini-pro
+EMBEDDING_DIMENSION=3072
+
+# RAG Configuration
+CHUNK_SIZE=1000
+CHUNK_OVERLAP=200
+SIMILARITY_TOP_K=3
+
+# Application
+ENVIRONMENT=development
+DEBUG=True
+```
+
+## 🧠 How It Works
+
+### 1. Document Processing Pipeline
+- *Upload*: User uploads PDF file via API
+- *Extraction*: PyPDF2 extracts text from each page
+- *Chunking*: Text split into overlapping chunks (1000 chars, 200 overlap)
+- *Embedding*: Gemini embedding model converts chunks to 3072-dim vectors
+- *Storage*: Vectors stored in PostgreSQL with pgvector extension
+
+### 2. Question Answering Flow
+- *Query*: User asks a question in natural language
+- *Embedding*: Question converted to vector using same embedding model
+- *Search*: Cosine similarity search finds top 3 relevant chunks
+- *Context*: Retrieved chunks + question sent to LLM
+- *Answer*: LLM generates answer based on retrieved context
+
+## ️ Database Schema
+
+### Tables:
+- *users*: User accounts (id, email, hashed_password, created_at, is_active)
+- *documents*: Uploaded PDFs (id, user_id, filename, file_path, uploaded_at, file_size)
+- *document_chunks*: Vector embeddings (id, doc_id, page_number, content, embedding vector(3072))
+- *chat_messages*: Conversation history (id, user_id, thread_id, role, content, created_at)
+
+### Indexes:
+- *HNSW index* on embedding column for O(log n) similarity search
+- *B-tree indexes* on user_id, doc_id for relational queries
+
+## 🔒 Security Features
+
+- *Password Hashing*: bcrypt with salt rounds
+- *JWT Tokens*: Secure authentication with expiration
+- *Input Validation*: Pydantic schemas for all endpoints
+- *CORS*: Configurable cross-origin resource sharing
+- *SQL Injection Prevention*: SQLAlchemy ORM with parameterized queries
+- *File Upload Validation*: PDF type checking and size limits (max 10MB)
+
+## 🚀 Performance Optimization
+
+1. *Vector Indexing*: HNSW (Hierarchical Navigable Small World) for fast similarity search
+2. *Connection Pooling*: PostgreSQL connection pool via SQLAlchemy
+3. *Async/Await*: Non-blocking I/O with FastAPI async endpoints
+4. *Chunking Strategy*: Optimal chunk size (1000 chars) balances context vs. performance
+5. *Batch Processing*: Multiple chunks embedded in single API call
+
+##  Scaling Considerations
+
+For production deployment with high traffic:
+
+- *Horizontal Scaling*: Multiple FastAPI instances behind Nginx load balancer
+- *Database*: PostgreSQL read replicas for query distribution
+- *Vector Search*: Dedicated pgvector instance or Pinecone/Weaviate
+- *Background Tasks*: Celery + Redis for async PDF processing
+- *File Storage*: AWS S3 or cloud storage instead of local filesystem
+- *Monitoring*: Prometheus + Grafana for metrics and alerting
+- *Caching*: Redis for frequently asked questions
+
+## 🐛 Troubleshooting
+
+*Issue*: Docker container won't start  
+*Solution*: Check .env file exists and has correct DATABASE_URL
+
+*Issue*: "Connection refused" to database  
+*Solution*: Ensure PostgreSQL container is healthy: docker-compose ps
+
+*Issue*: Slow similarity search  
+*Solution*: Verify HNSW index exists on embedding column
+
+*Issue*: PDF upload fails  
+*Solution*: Check file size (max 10MB) and ensure it's a valid PDF
+
+
+## 👨‍💻 Author
+
+*Sandip Magar*  
+[GitHub]*(https://github.com/sandip-magar)*
+
+---
+
+*Built with ❤️ for efficient document intelligence*
