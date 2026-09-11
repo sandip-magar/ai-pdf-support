@@ -2,9 +2,9 @@
 
 A production-ready document intelligence system that allows users to upload PDFs and ask questions using natural language. Built with FastAPI, pgvector, and Gemini AI.
 
-- [![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-green.svg)](https://fastapi.tiangolo.com)
-- [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads)
-- [![pgvector](https://img.shields.io/badge/pgvector-0.5.0-blue.svg)](https://github.com/pgvector/pgvector)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-green.svg)](https://fastapi.tiangolo.com)
+[![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads)
+[![pgvector](https://img.shields.io/badge/pgvector-0.5.0-blue.svg)](https://github.com/pgvector/pgvector)
 
 ## ✨ Features
 
