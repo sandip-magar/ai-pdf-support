@@ -34,8 +34,7 @@ ai-pdf-support/
 │   ├── __init__.py
 │   └── chat_history.py          # Get/delete conversation history
 ├── core/                        # Configuration & Security
-│   ├── __init__.py
-│   ├── config.py                # Environment variables
+│   ├── __init__.py             
 │   ├── security.py              # JWT, password hashing
 │   └── extensions.py            # Logging & middleware
 ├── db/                          # Database Layer
@@ -50,7 +49,7 @@ ai-pdf-support/
 ├── docker-compose.yml           # Docker orchestration
 ├── Dockerfile                   # Python 3.11 environment
 ├── init.sql                     # Database initialization
-├── main.py                      # FastAPI app with lifespan
+├── main.py                      # FastAPI app
 ├── requirements.txt             # Python dependencies
 ├── .env.example                 # Environment template
 ├── .gitignore                   # Git ignore rules
