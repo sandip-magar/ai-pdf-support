@@ -55,6 +55,7 @@ ai-pdf-support/
 ├── .gitignore                   # Git ignore rules
 ├── .dockerignore                # Docker ignore rules
 └── README.md                    # Project documentation
+|-- test_security.py             #Testing of the security with pytest
 ```
 
 ## 🚀 Quick Start
