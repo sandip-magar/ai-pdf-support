@@ -236,6 +236,20 @@ For production deployment with high traffic:
 *Issue*: PDF upload fails  
 *Solution*: Check file size (max 10MB) and ensure it's a valid PDF
 
+### App Screenshots 
+
+**1. API Architecture Overview**
+![Swagger UI](screenshots/swagger_ui.png)
+
+**2. Secure JWT Authentication**
+![Login Token](screenshots/login_token.png)
+
+**3. Upload PDF File**
+![Upload PDF](screenshots/pdf_upload.png)
+
+**4. AI Agents in Action**
+![AI Response](screenshots/ai_response.png)
+
 
 ## 👨‍💻 Author
 
