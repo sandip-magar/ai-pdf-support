@@ -239,16 +239,16 @@ For production deployment with high traffic:
 ### App Screenshots 
 
 **1. API Architecture Overview**
-![Swagger UI](screenshots/swagger_ui.png)
+![Swagger UI](Screenshots/swagger_ui.png)
 
 **2. Secure JWT Authentication**
-![Login Token](screenshots/login_token.png)
+![Login Token](Screenshots/login_token.png)
 
 **3. Upload PDF File**
-![Upload PDF](screenshots/pdf_upload.png)
+![Upload PDF](Screenshots/pdf_upload.png)
 
 **4. AI Agents in Action**
-![AI Response](screenshots/ai_response.png)
+![AI Response](Screenshots/ai_response.png)
 
 
 ## 👨‍💻 Author
