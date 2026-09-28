@@ -1,1 +1,2 @@
 2026-08-17 22:48:45,598 -ERROR - HTTPException error on /api/ai/delete-pdf/7 : Document Not Found
+2026-09-28 23:12:49,101 -ERROR - Validation error on /api/ai/ask-ai : <bound method ValidationException.errors of RequestValidationError([{'type': 'json_invalid', 'loc': ('body', 85), 'msg': 'JSON decode error', 'input': {}, 'ctx': {'error': 'Invalid control character at'}}])>
